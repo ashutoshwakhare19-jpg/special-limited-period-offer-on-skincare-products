@@ -2,208 +2,89 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Hey Afia 💖</title>
+<title>Valentine Week 💖</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-    body {
-        margin: 0;
-        height: 100vh;
-        font-family: 'Segoe UI', sans-serif;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        overflow: hidden;
-        /* Pink + black hearts pattern */
-        background-color: #ffb6c1;
-        background-image:
-            radial-gradient(#ff4d8d 2px, transparent 2px),
-            radial-gradient(#000000 2px, transparent 2px);
-        background-size: 40px 40px, 60px 60px;
-        background-position: 0 0, 20px 20px;
-    }
+body{
+    margin:0;
+    height:100vh;
+    font-family:'Segoe UI',sans-serif;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+}
 
-    /* Floating emoji layer */
-    .floating {
-        position: fixed;
-        bottom: -10vh;
-        font-size: 30px;
-        animation: floatUp 7s linear infinite;
-        opacity: 0.9;
-        z-index: 1;
-        pointer-events: none; /* Allows clicking through emojis */
-    }
+.card{
+    background:white;
+    padding:40px;
+    border-radius:25px;
+    text-align:center;
+    box-shadow:0 25px 50px rgba(0,0,0,0.2);
+    width:320px;
+}
 
-    @keyframes floatUp {
-        from { transform: translateY(0); }
-        to { transform: translateY(-120vh); }
-    }
+h1{
+    color:#e63946;
+    margin-bottom:25px;
+}
 
-    .card {
-        background: white;
-        padding: 45px 35px;
-        border-radius: 28px;
-        text-align: center;
-        box-shadow: 0 25px 50px rgba(0,0,0,0.25);
-        max-width: 380px;
-        width: 90%;
-        position: relative;
-        z-index: 2;
-    }
+.buttons{
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+}
 
-    h1 {
-        color: #e63946;
-        font-size: 32px;
-        margin-bottom: 20px;
-    }
+button{
+    padding:15px;
+    font-size:18px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+    transition:0.3s;
+}
 
-    .question {
-        font-size: 18px;
-        font-weight: bold;
-        color: #333;
-        line-height: 1.6;
-    }
+button:hover{
+    transform:scale(1.05);
+}
 
-    .valentine-text {
-        font-size: 30px;
-        color: #ff4d8d;
-        font-weight: 900;
-        margin: 20px 0;
-    }
+/* Individual button colors */
+.rose{ background:#e63946; color:white; }
+.propose{ background:#ff4d8d; color:white; }
+.choco{ background:#5a3825; color:white; }
 
-    .buttons {
-        position: relative;
-        height: 65px;
-        margin-top: 25px;
-        display: flex;
-        justify-content: center;
-        gap: 15px; /* Adds space between buttons */
-    }
-
-    button {
-        padding: 14px 32px;
-        font-size: 16px;
-        border: none;
-        border-radius: 35px;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        font-weight: bold;
-    }
-
-    #yesBtn {
-        background-color: #e63946;
-        color: white;
-        z-index: 10;
-    }
-
-    #yesBtn:hover {
-        background-color: #d62839;
-        transform: scale(1.1);
-    }
-
-    #noBtn {
-        background-color: #f1f1f1;
-        color: #333;
-        position: absolute; /* Allows movement */
-        z-index: 10;
-    }
-
-    .result {
-        display: none;
-        margin-top: 25px;
-        font-size: 22px;
-        color: #e63946;
-        font-weight: bold;
-        animation: popIn 0.5s ease;
-    }
-
-    /* Anime reaction */
-    .anime-scene {
-        display: none;
-        margin-top: 25px;
-        font-size: 42px;
-        line-height: 1.4;
-        animation: popIn 0.8s ease;
-    }
-
-    @keyframes popIn {
-        0% { transform: scale(0); opacity: 0; }
-        100% { transform: scale(1); opacity: 1; }
-    }
+.footer{
+    margin-top:20px;
+    font-size:12px;
+    color:#777;
+}
 </style>
 </head>
 
 <body>
 
-    <div class="floating" style="left:5%; animation-delay:0s;">💖</div>
-    <div class="floating" style="left:15%; animation-delay:1s;">🐱</div>
-    <div class="floating" style="left:30%; animation-delay:2s;">🌸</div>
-    <div class="floating" style="left:45%; animation-delay:3s;">🖤</div>
-    <div class="floating" style="left:60%; animation-delay:4s;">🐾</div>
-    <div class="floating" style="left:75%; animation-delay:5s;">💐</div>
-    <div class="floating" style="left:90%; animation-delay:6s;">💗</div>
+<div class="card">
+    <h1>Valentine Week 💖</h1>
 
-    <div class="card">
-        <h1>Hey Afia 💖</h1>
+    <div class="buttons">
+        <button class="rose" onclick="location.href='rose-day.html'">
+            🌹 Rose Day
+        </button>
 
-        <div class="question">
-            I have a very important question for you Kitten.<br><br>
-            And that is...
-        </div>
+        <button class="propose" onclick="location.href='propose-day.html'">
+            💍 Propose Day
+        </button>
 
-        <div class="valentine-text">
-            Will you be my Valentine?
-        </div>
-
-        <div class="buttons">
-            <button id="yesBtn">Yes ✨</button>
-            <button id="noBtn">No 🙈</button>
-        </div>
-
-        <div class="result" id="result">
-            YAY!!! 🥰💘
-        </div>
-
-        <div class="anime-scene" id="animeScene">
-            👦😍 ➡️ 👧💕<br>
-            💖💖💖
-        </div>
+        <button class="choco" onclick="location.href='chocolate-day.html'">
+            🍫 Chocolate Day
+        </button>
     </div>
 
-    <script>
-        const noBtn = document.getElementById("noBtn");
-        const yesBtn = document.getElementById("yesBtn");
-        const result = document.getElementById("result");
-        const animeScene = document.getElementById("animeScene");
-
-        // Function to move the button
-        function moveButton() {
-            const containerWidth = document.querySelector('.card').offsetWidth;
-            const containerHeight = document.querySelector('.card').offsetHeight;
-            
-            // Calculate random position within card limits
-            const x = Math.random() * (containerWidth - 100) - (containerWidth / 2) + 50;
-            const y = Math.random() * (containerHeight - 100) - (containerHeight / 2) + 50;
-
-            noBtn.style.transform = `translate(${x}px, ${y}px)`;
-        }
-
-        // Desktop Hover
-        noBtn.addEventListener("mouseover", moveButton);
-        
-        // Mobile Touch (The fix!)
-        noBtn.addEventListener("touchstart", function(e) {
-            e.preventDefault(); // Prevents the click from happening
-            moveButton();
-        });
-
-        yesBtn.addEventListener("click", () => {
-            result.style.display = "block";
-            animeScene.style.display = "block";
-            yesBtn.style.display = "none";
-            noBtn.style.display = "none";
-        });
-    </script>
+    <div class="footer">
+        Made with love 😌
+    </div>
+</div>
 
 </body>
 </html>

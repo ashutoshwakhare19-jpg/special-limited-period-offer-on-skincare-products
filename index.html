@@ -6,73 +6,87 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-body{
-    margin:0;
-    height:100vh;
-    font-family:'Segoe UI',sans-serif;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    background:linear-gradient(135deg,#ff9a9e,#fad0c4);
-    overflow:hidden;
-}
+    body{
+        margin:0;
+        height:100vh;
+        font-family:'Segoe UI',sans-serif;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+        background:linear-gradient(135deg,#ff9a9e,#fad0c4);
+        overflow:hidden;
+    }
 
-.card{
-    background:white;
-    padding:40px;
-    border-radius:25px;
-    text-align:center;
-    box-shadow:0 25px 50px rgba(0,0,0,0.2);
-    width:350px;
-    position:relative;
-    z-index:2;
-}
+    .card{
+        background:white;
+        padding:40px;
+        border-radius:25px;
+        text-align:center;
+        box-shadow:0 25px 50px rgba(0,0,0,0.2);
+        width:350px;
+        position:relative;
+        z-index:2;
+    }
 
-h1{
-    color:#e63946;
-    margin-bottom:25px;
-}
+    h1{
+        color:#e63946;
+        margin-bottom:25px;
+    }
 
-.buttons{
-    display:flex;
-    flex-direction:column;
-    gap:15px;
-}
+    .buttons{
+        display:flex;
+        flex-direction:column;
+        gap:15px;
+    }
 
-button{
-    padding:15px;
-    font-size:18px;
-    border:none;
-    border-radius:30px;
-    cursor:pointer;
-    transition:0.3s;
-}
+    button{
+        padding:15px;
+        font-size:18px;
+        border:none;
+        border-radius:30px;
+        cursor:pointer;
+        transition:0.3s;
+        font-weight: bold;
+    }
 
-button:hover{
-    transform:scale(1.05);
-}
+    button:hover{
+        transform:scale(1.05);
+    }
+    
+    button:active{
+        transform:scale(0.95);
+    }
 
-.rose{ background:#e63946; color:white; }
-.propose{ background:#ff4d8d; color:white; }
-.choco{ background:#5a3825; color:white; }
+    /* Button specific colors */
+    .rose{ background:#e63946; color:white; }
+    .propose{ background:#ff4d8d; color:white; }
+    .choco{ background:#5a3825; color:white; }
 
-.message{
-    margin-top:20px;
-    font-size:18px;
-    font-weight:bold;
-}
+    .message{
+        margin-top:20px;
+        font-size:18px;
+        font-weight:bold;
+        color: #333;
+        min-height: 50px; /* Keeps space so layout doesn't jump */
+        line-height: 1.4;
+    }
 
-/* Falling emojis */
-.fall{
-    position:fixed;
-    top:-10vh;
-    font-size:28px;
-    animation:drop linear forwards;
-}
+    /* Falling emojis */
+    .fall{
+        position:fixed;
+        top:-10vh;
+        font-size:28px;
+        /* Default animation settings */
+        animation-name: drop;
+        animation-timing-function: linear;
+        animation-fill-mode: forwards;
+        z-index: 1; /* Behind the card */
+    }
 
-@keyframes drop{
-    to{ transform:translateY(110vh); }
-}
+    @keyframes drop{
+        0% { transform: translateY(0); }
+        100% { transform: translateY(110vh); }
+    }
 </style>
 </head>
 
@@ -82,9 +96,9 @@ button:hover{
     <h1>Valentine Week 💖</h1>
 
     <div class="buttons">
-        <button class="rose" onclick="roseShower()">🌹 Happy Rose Day</button>
-        <button class="propose" onclick="showPropose()">💍 Happy Propose Day</button>
-        <button class="choco" onclick="chocoShower()">🍫 Happy Chocolate Day</button>
+        <button type="button" class="rose" onclick="roseShower()">🌹 Happy Rose Day</button>
+        <button type="button" class="propose" onclick="showPropose()">💍 Happy Propose Day</button>
+        <button type="button" class="choco" onclick="chocoShower()">🍫 Happy Chocolate Day</button>
     </div>
 
     <div class="message" id="message"></div>
@@ -92,32 +106,48 @@ button:hover{
 
 <script>
 function roseShower(){
-    for(let i=0;i<40;i++){
-        let r=document.createElement("div");
-        r.className="fall";
-        r.innerHTML="🌹";
-        r.style.left=Math.random()*100+"vw";
-        r.style.animationDuration=(3+Math.random()*3)+"s";
-        document.body.appendChild(r);
-    }
+    createFallingElement("🌹");
 }
 
 function chocoShower(){
-    for(let i=0;i<40;i++){
-        let c=document.createElement("div");
-        c.className="fall";
-        c.innerHTML="🍫";
-        c.style.left=Math.random()*100+"vw";
-        c.style.animationDuration=(3+Math.random()*3)+"s";
-        document.body.appendChild(c);
+    createFallingElement("🍫");
+}
+
+function createFallingElement(emoji){
+    for(let i=0; i<30; i++){
+        let e = document.createElement("div");
+        e.className = "fall";
+        e.innerHTML = emoji;
+        e.style.left = Math.random() * 100 + "vw";
+        e.style.animationDuration = (2 + Math.random() * 3) + "s";
+        e.style.fontSize = (20 + Math.random() * 20) + "px"; // Random sizes looks better
+        document.body.appendChild(e);
+
+        // IMPORTANT: Remove the element after animation ends to prevent lag
+        setTimeout(() => {
+            e.remove();
+        }, 5000);
     }
 }
 
 function showPropose(){
-    document.getElementById("message").innerHTML =
-    "I propose that you look just as much hot and sexy and kinky and pretty all the time 😌💖";
+    const msgDiv = document.getElementById("message");
+    msgDiv.innerHTML = "I propose that you look just as much hot and sexy and kinky and pretty all the time 😌💖";
+    
+    // Optional: Add a subtle pop animation to the text
+    msgDiv.style.animation = "none";
+    msgDiv.offsetHeight; /* trigger reflow */
+    msgDiv.style.animation = "popIn 0.5s ease";
 }
 </script>
+
+<style>
+/* Animation for text popping in */
+@keyframes popIn {
+    0% { transform: scale(0.8); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+</style>
 
 </body>
 </html>
